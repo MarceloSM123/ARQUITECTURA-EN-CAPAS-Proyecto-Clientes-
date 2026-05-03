@@ -1,6 +1,7 @@
 package com.krakedev.clientes.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.krakedev.clientes.entidades.Cliente;
 
@@ -28,5 +29,32 @@ public class ServicioCliente {
 			clientes.add(cliente);
 			return cliente;
 		}
+	}
+
+	public List<Cliente> listar() {
+		return clientes;
+	}
+
+	public Cliente actualizar(String cedula, Cliente clienteActualizado) {
+		Cliente cliente = buscarPorCedula(cedula);
+
+		if (cliente != null) {
+			cliente.setNombre(clienteActualizado.getNombre());
+			cliente.setApellido(clienteActualizado.getApellido());
+
+			return cliente;
+		}
+
+		return null;
+	}
+	
+	public boolean eliminar(String cedula) {
+	    Cliente cliente = buscarPorCedula(cedula);
+	    if (cliente != null) {
+	        clientes.remove(cliente);
+	        return true;
+	    } else {
+	        return false;
+	    }
 	}
 }
